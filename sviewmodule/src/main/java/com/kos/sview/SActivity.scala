@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.{AlertDialog, AppCompatActivity}
 import android.support.v7.widget.{LinearLayoutManager, RecyclerView, Toolbar}
+import android.text.{Editable, TextWatcher}
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
@@ -22,20 +23,47 @@ object SActivity{
 		}
 	}
 
+
+	implicit class ViewInliner(val view: View) extends AnyVal {
+		@inline def click(body: () => Unit): Unit =
+			view.setOnClickListener(new OnClickListener {
+				override def onClick(v: View): Unit = {
+					body()
+				}
+			})
+	}
+
+	@inline implicit def textWatcherImpl(bodyTextChanged: Editable => Unit): TextWatcher = {
+		new TextWatcher {
+			override def beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int): Unit = {}
+
+			override def onTextChanged(s: CharSequence, start: Int, before: Int, count: Int): Unit = {}
+
+			override def afterTextChanged(s: Editable): Unit = {
+				bodyTextChanged(s)
+			}
+		}
+	}
+
+	@inline implicit def clickListenerImpl(body: () => Unit): OnClickListener = {
+		new OnClickListener {
+			override def onClick(v: View): Unit = {
+				body()
+			}
+		}
+	}
+
+
 	val KEY_ID="Key_id"
 	val NONE_ID = -1
 }
 
 
-trait SActivity {
+trait SActivity  extends SWindow{
 
 	self: AppCompatActivity =>
 
 	@inline def find[T](@IdRes id: Int) = findViewById(id).asInstanceOf[T]
-
-	@inline def snack(view: View, text: CharSequence) = if (view!=null) Snackbar.make(view, text, Snackbar.LENGTH_LONG).show()
-
-	@inline def snack(view: View,@StringRes resId: Int) = if (view!=null) Snackbar.make(view, resId, Snackbar.LENGTH_LONG).show()
 
 	@inline def toast(text: CharSequence) = Toast.makeText(getApplicationContext,text, Toast.LENGTH_SHORT).show()
 
@@ -88,49 +116,7 @@ trait SActivity {
 		}
 	}
 
-	def alertYesNo(resTitle: Int, resInfo: Int, yesOperator: () => Unit, noOperator: () => Unit ): Unit = {
 
-		val alertDialog: AlertDialog = new AlertDialog.Builder(this).create
-		alertDialog.setTitle(resTitle)
-		alertDialog.setMessage(getString(resInfo))
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(android.R.string.yes),new DialogInterface
-		.OnClickListener {
-			override def onClick(dialog: DialogInterface, which: Int): Unit = {
-				yesOperator()
-			}
-		} )
-		alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(android.R.string.no),new DialogInterface
-		.OnClickListener{
-			override def onClick(dialog: DialogInterface, which: Int): Unit = {
-				noOperator()
-			}
-		})
-
-		alertDialog.show
-
-		//		val dialog= new DialogFragment{
-		//			override def onCreateDialog(savedInstanceState:Bundle):Dialog = {
-		//				// Use the Builder class for convenient dialog construction
-		//				val builder = new AlertDialog.Builder(getActivity())
-		//				builder.setTitle(resTitle)
-		//				builder.setMessage(getString(resInfo))
-		//					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-		//						override def onClick(dialog:DialogInterface, id:Int) {
-		//							yesOperator()
-		//						}
-		//					})
-		//					.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-		//						override def onClick(dialog :DialogInterface, id: Int) {
-		//							noOperator()
-		//						}
-		//					})
-		//				// Create the AlertDialog object and return it
-		//				builder.create()
-		//			}
-		//		}
-		//		dialog.
-
-	}
 
 }
 
