@@ -9,7 +9,7 @@ import android.support.v7.widget.{LinearLayoutManager, RecyclerView, Toolbar}
 import android.text.{Editable, TextWatcher}
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Toast
+import android.widget.{TextView, Toast}
 
 /**
   * Created by Kos on 01.04.2017.
@@ -23,8 +23,15 @@ object SActivity{
 		}
 	}
 
+	implicit class TextViewOps(val a:TextView) extends AnyVal{
+		@inline def text:String =a.getText.toString
+	}
 
-	implicit class ViewInliner(val view: View) extends AnyVal {
+	implicit class ViewOps(val view:View) extends AnyVal{
+		@inline def gone:Unit = view.setVisibility(View.GONE)
+		@inline def visible:Unit = view.setVisibility(View.VISIBLE)
+		@inline def invisible:Unit = view.setVisibility(View.INVISIBLE)
+
 		@inline def click(body: () => Unit): Unit =
 			view.setOnClickListener(new OnClickListener {
 				override def onClick(v: View): Unit = {
@@ -32,6 +39,7 @@ object SActivity{
 				}
 			})
 	}
+
 
 	@inline implicit def textWatcherImpl(bodyTextChanged: Editable => Unit): TextWatcher = {
 		new TextWatcher {
