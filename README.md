@@ -1,5 +1,7 @@
 # SView - Scala Android View
 
+[![](https://jitpack.io/v/AllBus/sview.svg)](https://jitpack.io/#AllBus/sview)
+
 Library for easy UI manipulation
 
 
