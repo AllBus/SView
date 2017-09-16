@@ -18,6 +18,9 @@ object BusProvider {
 		lastId
 	}
 
+	def getBus = bus
+
+	def garbage() = bus.garbage()
 
 	def post(message: IBusSender): Unit = bus.post(message)
 
