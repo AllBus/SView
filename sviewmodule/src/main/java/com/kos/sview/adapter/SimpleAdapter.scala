@@ -32,7 +32,7 @@ class SimpleAdapter[DT: ClassTag, T<: SimpleHolder[DT]](
 		}
 	}
 
-	val infalter=LayoutInflater.from(context)
+	val inflater=LayoutInflater.from(context)
 	private[this] var list:Array[DT]=Array.empty[DT]
 
 	def getList = list
@@ -50,7 +50,7 @@ class SimpleAdapter[DT: ClassTag, T<: SimpleHolder[DT]](
 	}
 
 	override def onCreateViewHolder(parent: ViewGroup, viewType: Int): T = {
-		constructor(infalter.inflate(layoutRes,parent,false),click)
+		constructor(inflater.inflate(layoutRes,parent,false),click)
 	}
 
 	def changeList(model: Array[DT]) = {

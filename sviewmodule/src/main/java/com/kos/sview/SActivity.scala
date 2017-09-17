@@ -25,6 +25,7 @@ object SActivity{
 
 	implicit class TextViewOps(val a:TextView) extends AnyVal{
 		@inline def text:String =a.getText.toString
+		@inline def text_=(newValue:CharSequence):Unit = a.setText(newValue)
 	}
 
 	implicit class ViewOps(val view:View) extends AnyVal{
@@ -75,6 +76,8 @@ trait SActivity  extends SWindow{
 
 	@inline def toast(text: CharSequence) = Toast.makeText(getApplicationContext,text, Toast.LENGTH_SHORT).show()
 
+	@inline def toast(@StringRes textId: Int) = Toast.makeText(getApplicationContext,textId, Toast.LENGTH_SHORT).show()
+
 	def drawable(@DrawableRes id: Int) = ContextCompat.getDrawable(this,id)
 
 
@@ -85,6 +88,13 @@ trait SActivity  extends SWindow{
 			case v:View ⇒ v.setOnClickListener(clickListener)
 			case _ ⇒
 		}
+	}
+
+	def addClick(viewIds:Array[Int],clickListener: OnClickListener): Unit ={
+		viewIds.foreach(findViewById(_) match{
+			case v:View ⇒ v.setOnClickListener(clickListener)
+			case _ ⇒
+		})
 	}
 
 	def fragmentManager = getSupportFragmentManager

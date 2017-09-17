@@ -1,5 +1,5 @@
 group 'com.github.allbus'
-version '1.0.3'
+version '1.0.4'
 
 apply plugin: 'com.android.library'
 apply plugin: 'jp.leafytree.android-scala'
