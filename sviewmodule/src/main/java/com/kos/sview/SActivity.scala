@@ -26,6 +26,8 @@ object SActivity{
 	implicit class TextViewOps(val a:TextView) extends AnyVal{
 		@inline def text:String =a.getText.toString
 		@inline def text_=(newValue:CharSequence):Unit = a.setText(newValue)
+		@inline def text_=(newValue:TextView):Unit = a.setText(newValue.getText)
+		@inline def clear:Unit = a.setText("")
 	}
 
 	implicit class ViewOps(val view:View) extends AnyVal{
