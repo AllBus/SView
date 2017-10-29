@@ -35,6 +35,7 @@ object SActivity{
 	implicit class ViewOps(val view:View) extends AnyVal{
 		@inline def gone:Unit = view.setVisibility(View.GONE)
 		@inline def visible:Unit = view.setVisibility(View.VISIBLE)
+		@inline def visible(state:Boolean):Unit = view.setVisibility( if (state) View.VISIBLE else View.GONE)
 		@inline def invisible:Unit = view.setVisibility(View.INVISIBLE)
 
 		@inline def click(body: () => Unit): Unit =
@@ -67,8 +68,8 @@ object SActivity{
 	}
 
 
-	val KEY_ID="Key_id"
-	val NONE_ID = -1
+	final val KEY_ID = "Key_id"
+	final val NONE_ID = -1
 }
 
 
