@@ -14,7 +14,7 @@ trait SWindow {
 
 	@inline def snack(view: View,@StringRes resId: Int) = if (view!=null) Snackbar.make(view, resId, Snackbar.LENGTH_LONG).show()
 
-	@inline def find[T <: View](view: View, resId: Int) = view.findViewById(resId).asInstanceOf[T]
+	@inline def find[T <: View](view: View, resId: Int) = view.findViewById[T](resId)
 
 	def alertYesNo(resTitle: Int, resInfo: Int, yesOperator: () => Unit, noOperator: () => Unit )(implicit ctx:Context): Unit = {
 

@@ -11,6 +11,8 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.{TextView, Toast}
 
+import scala.language.implicitConversions
+
 /**
   * Created by Kos on 01.04.2017.
   */
@@ -74,7 +76,7 @@ trait SActivity  extends SWindow{
 
 	self: AppCompatActivity =>
 
-	@inline def find[T](@IdRes id: Int) = findViewById(id).asInstanceOf[T]
+	@inline def find[T](@IdRes id: Int) = findViewById[T](id)
 
 	@inline def toast(text: CharSequence) = Toast.makeText(getApplicationContext,text, Toast.LENGTH_SHORT).show()
 
@@ -86,14 +88,14 @@ trait SActivity  extends SWindow{
 	def dimension(@DimenRes id: Int) =	getResources.getDimension(id)
 
 	def addClick(@IdRes viewId:Int,clickListener: OnClickListener): Unit ={
-		findViewById(viewId) match{
+		findViewById[View](viewId) match{
 			case v:View ⇒ v.setOnClickListener(clickListener)
 			case _ ⇒
 		}
 	}
 
 	def addClick(viewIds:Array[Int],clickListener: OnClickListener): Unit ={
-		viewIds.foreach(findViewById(_) match{
+		viewIds.foreach(findViewById[View](_) match{
 			case v:View ⇒ v.setOnClickListener(clickListener)
 			case _ ⇒
 		})
@@ -113,7 +115,7 @@ trait SActivity  extends SWindow{
 	}
 
 	def setupToolBar(@IdRes toolbarId:Int): Unit ={
-		val toolbar = findViewById(toolbarId).asInstanceOf[Toolbar]
+		val toolbar = findViewById[Toolbar](toolbarId)
 		setSupportActionBar(toolbar)
 	}
 

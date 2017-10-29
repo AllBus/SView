@@ -11,7 +11,7 @@ import android.widget.Toast
 trait SFragment extends SWindow{
 	self: Fragment =>
 
-	def find[T <: View](resId: Int) = getView.findViewById(resId).asInstanceOf[T]
+	def find[T <: View](resId: Int) = getView.findViewById[T](resId)
 
 	def context = getActivity
 

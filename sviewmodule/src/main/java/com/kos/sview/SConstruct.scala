@@ -7,10 +7,10 @@ import android.view.View
  */
 trait SConstruct {
 	@inline def find[T <: View](rootView: View, resourceId: Int): T = {
-		rootView.findViewById(resourceId).asInstanceOf[T]
+		rootView.findViewById[T](resourceId)
 	}
 
 	@inline def find[T <: View](resourceId: Int)(implicit rootView: View): T = {
-		rootView.findViewById(resourceId).asInstanceOf[T]
+		rootView.findViewById[T](resourceId)
 	}
 }

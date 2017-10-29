@@ -12,28 +12,27 @@ import scala.reflect.ClassTag
 /**
   * Created by Kos on 06.07.2016.
   */
-class SimpleAdapter[DT: ClassTag, T<: SimpleHolder[DT]](
-														  context:Context,
-														  @LayoutRes layoutRes:Int,
-														  constructor: (View,OnClickListener) ⇒ T,
-														  clickItem: DT ⇒ Unit,
-														  onUpdateItems: Array[DT] ⇒ Unit
-										 ) extends RecyclerView.Adapter[T]{
+class SimpleAdapter[DT: ClassTag, T <: SimpleHolder[DT]](
+															context: Context,
+															@LayoutRes layoutRes: Int,
+															constructor: (View, OnClickListener) ⇒ T,
+															clickItem: DT ⇒ Unit,
+															onUpdateItems: Array[DT] ⇒ Unit
+														) extends RecyclerView.Adapter[T] {
 
 
-
-	val click=new OnClickListener {
+	val click = new OnClickListener {
 		override def onClick(v: View): Unit = {
 			v.getTag match {
-				case x:DT ⇒
+				case x: DT ⇒
 					clickItem(x)
 				case _ ⇒
 			}
 		}
 	}
 
-	val inflater=LayoutInflater.from(context)
-	private[this] var list:Array[DT]=Array.empty[DT]
+	val inflater = LayoutInflater.from(context)
+	private[this] var list: Array[DT] = Array.empty[DT]
 
 	def getList = list
 
@@ -41,37 +40,36 @@ class SimpleAdapter[DT: ClassTag, T<: SimpleHolder[DT]](
 		list.length
 	}
 
-	def getItem(position: Int):DT = {
+	def getItem(position: Int): DT = {
 		list(position)
 	}
 
 	override def onBindViewHolder(holder: T, position: Int): Unit = {
-		holder.bind(position,getItem(position))
+		holder.bind(position, getItem(position))
 	}
 
 	override def onCreateViewHolder(parent: ViewGroup, viewType: Int): T = {
-		constructor(inflater.inflate(layoutRes,parent,false),click)
+		constructor(inflater.inflate(layoutRes, parent, false), click)
 	}
 
 	def changeList(model: Array[DT]) = {
-		if (model ne list){
-			list=model
+		if (model ne list) {
+			list = model
 			onUpdateItems(list)
 			notifyDataSetChanged()
 		}
 	}
 
 	def updateItems(id: Seq[Int]): Unit = {
-		id.foreach{x ⇒
-			val y=list.indexOf(x)
-			if (y>=0)
+		id.foreach { x ⇒
+			val y = list.indexOf(x)
+			if (y >= 0)
 				notifyItemChanged(y)
 		}
 	}
 
-	def updateVisibleItems(list:RecyclerView) = {
-		if (list!=null)
-		{
+	def updateVisibleItems(list: RecyclerView) = {
+		if (list != null) {
 
 
 			try {
@@ -85,8 +83,8 @@ class SimpleAdapter[DT: ClassTag, T<: SimpleHolder[DT]](
 					}
 					wantedChild += 1
 				}
-			}catch {
-				case _ :Throwable =>
+			} catch {
+				case _: Throwable =>
 
 			}
 
@@ -95,9 +93,9 @@ class SimpleAdapter[DT: ClassTag, T<: SimpleHolder[DT]](
 
 	}
 
-	def updateChild(wantedView: RecyclerView.ViewHolder,element:DT,position:Int) {
-		wantedView match{
-			case holder : SimpleHolder[DT] ⇒ holder.bind(position,element)
+	def updateChild(wantedView: RecyclerView.ViewHolder, element: DT, position: Int) {
+		wantedView match {
+			case holder: SimpleHolder[DT] ⇒ holder.bind(position, element)
 			case _ ⇒
 		}
 	}
