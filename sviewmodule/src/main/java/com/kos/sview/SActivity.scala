@@ -76,7 +76,7 @@ trait SActivity  extends SWindow{
 
 	self: AppCompatActivity =>
 
-	@inline def find[T](@IdRes id: Int) = findViewById[T](id)
+	@inline def find[T<: View](@IdRes id: Int) = findViewById[T](id)
 
 	@inline def toast(text: CharSequence) = Toast.makeText(getApplicationContext,text, Toast.LENGTH_SHORT).show()
 

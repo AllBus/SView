@@ -1,12 +1,12 @@
 group 'com.github.allbus'
-version '1.0.5'
+version '1.0.8'
 
 apply plugin: 'com.android.library'
 apply plugin: 'jp.leafytree.android-scala'
 
 android {
 	compileSdkVersion 26
-	buildToolsVersion "26.0.1"
+	buildToolsVersion "26.0.2"
 
 	defaultConfig {
 		minSdkVersion 15

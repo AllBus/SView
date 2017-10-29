@@ -7,5 +7,5 @@ import android.view.View
   * Created by Kos on 01.04.2017.
   */
 class SViewHolder(topView:View)  extends RecyclerView.ViewHolder(topView) {
-	def find[T](viewId:Int) = itemView.findViewById[T](viewId)
+	def find[T <: View](viewId:Int) = itemView.findViewById[T](viewId)
 }

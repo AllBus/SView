@@ -10,7 +10,7 @@ import android.view.View.OnClickListener
   */
 class SimpleHolder[DT](topView:View,itemClick:OnClickListener) extends RecyclerView.ViewHolder(topView){
 
-	@inline def find[T](@IdRes id: Int) = itemView.findViewById[T](id)
+	@inline def find[T <: View](@IdRes id: Int) = itemView.findViewById[T](id)
 
 //	val image=find[ImageView](R.id.image)
 //	val numberLabel=find[TextView](R.id.numberLabel)
