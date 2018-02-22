@@ -1,12 +1,11 @@
 group 'com.github.allbus'
-version '1.0.10'
+version '1.0.11'
 
 apply plugin: 'com.android.library'
 apply plugin: 'jp.leafytree.android-scala'
 
 android {
 	compileSdkVersion 27
-	buildToolsVersion "26.0.2"
 
 	defaultConfig {
 		minSdkVersion 15
@@ -27,11 +26,11 @@ android {
 
 dependencies {
 
-	compile 'com.android.support:appcompat-v7:27.0.0'
-	compile 'com.android.support:recyclerview-v7:27.0.0'
-	compile 'com.android.support:design:27.0.0'
-	compile 'com.github.AllBus:weakbus:1.0.7'
-	compile 'org.scala-lang:scala-library:2.11.11'
+	provided 'com.android.support:appcompat-v7:27.0.2'
+	provided 'com.android.support:recyclerview-v7:27.0.2'
+	provided 'com.android.support:design:27.0.2'
+	implementation 'com.github.AllBus:weakbus:1.0.7'
+	provided 'org.scala-lang:scala-library:2.11.12'
 
 	testCompile 'junit:junit:4.12'
 }

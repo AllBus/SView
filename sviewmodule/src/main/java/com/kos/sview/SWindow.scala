@@ -59,4 +59,6 @@ trait SWindow {
 		//		dialog.
 
 	}
+
+
 }

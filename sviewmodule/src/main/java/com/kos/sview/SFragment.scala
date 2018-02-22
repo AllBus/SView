@@ -18,4 +18,6 @@ trait SFragment extends SWindow{
 	@inline def toast(text: CharSequence) = Toast.makeText(getActivity.getApplicationContext,text, Toast.LENGTH_SHORT).show()
 
 	@inline def toast(@StringRes textId: Int) = Toast.makeText(getActivity.getApplicationContext,textId, Toast.LENGTH_SHORT).show()
+
+
 }

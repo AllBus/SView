@@ -1,14 +1,14 @@
 package com.kos.sview
 
-import android.content.{Context, DialogInterface, Intent}
+import android.content.{Context, Intent}
 import android.support.annotation.{DimenRes, DrawableRes, IdRes, StringRes}
-import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.{AlertDialog, AppCompatActivity}
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.{LinearLayoutManager, RecyclerView, Toolbar}
 import android.text.{Editable, TextWatcher}
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.inputmethod.InputMethodManager
 import android.widget.{TextView, Toast}
 
 import scala.language.implicitConversions
@@ -18,21 +18,21 @@ import scala.language.implicitConversions
   */
 
 object SActivity{
-	implicit class RecyclerViewExtension(val recyclerView:RecyclerView) extends AnyVal{
+	implicit final class RecyclerViewExtension(val recyclerView:RecyclerView) extends AnyVal{
 		@inline
 		def standard(implicit ctx:Context) = {
 			recyclerView.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false))
 		}
 	}
 
-	implicit class TextViewOps(val a:TextView) extends AnyVal{
+	implicit final class TextViewOps(val a:TextView) extends AnyVal{
 		@inline def text:String =a.getText.toString
 		@inline def text_=(newValue:CharSequence):Unit = a.setText(newValue)
 		@inline def text_=(newValue:TextView):Unit = a.setText(newValue.getText)
 		@inline def clear:Unit = a.setText("")
 	}
 
-	implicit class ViewOps(val view:View) extends AnyVal{
+	implicit final class ViewOps(val view:View) extends AnyVal{
 		@inline def gone:Unit = view.setVisibility(View.GONE)
 		@inline def visible:Unit = view.setVisibility(View.VISIBLE)
 		@inline def visible(state:Boolean):Unit = view.setVisibility( if (state) View.VISIBLE else View.GONE)
@@ -139,7 +139,13 @@ trait SActivity  extends SWindow{
 		}
 	}
 
-
+	def hideKeyboard(): Unit = {
+		val view = this.getCurrentFocus
+		if (view != null) {
+			val imm = getSystemService(Context.INPUT_METHOD_SERVICE).asInstanceOf[InputMethodManager]
+			imm.hideSoftInputFromWindow(view.getWindowToken, 0)
+		}
+	}
 
 }
 
