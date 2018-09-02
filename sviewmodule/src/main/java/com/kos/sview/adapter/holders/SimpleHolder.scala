@@ -1,9 +1,10 @@
 package com.kos.sview.adapter.holders
 
-import android.support.annotation.IdRes
-import android.support.v7.widget.RecyclerView
+
 import android.view.View
 import android.view.View.OnClickListener
+import androidx.annotation.IdRes
+import androidx.recyclerview.widget.RecyclerView
 
 /**
   * Created by Kos on 06.07.2016.

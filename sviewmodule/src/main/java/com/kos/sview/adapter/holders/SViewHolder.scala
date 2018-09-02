@@ -1,7 +1,7 @@
 package com.kos.sview.adapter.holders
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 /**
   * Created by Kos on 01.04.2017.

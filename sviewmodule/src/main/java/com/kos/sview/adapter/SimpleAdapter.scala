@@ -1,10 +1,10 @@
 package com.kos.sview.adapter
 
 import android.content.Context
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.RecyclerView
 import android.view.View.OnClickListener
 import android.view.{LayoutInflater, View, ViewGroup}
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.RecyclerView
 import com.kos.sview.adapter.holders.SimpleHolder
 
 import scala.reflect.ClassTag

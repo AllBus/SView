@@ -1,15 +1,16 @@
 package com.kos.sview
 
 import android.content.{Context, Intent}
-import android.support.annotation.{DimenRes, DrawableRes, IdRes, StringRes}
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.{LinearLayoutManager, RecyclerView, Toolbar}
 import android.text.{Editable, TextWatcher}
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.{TextView, Toast}
+import androidx.annotation.{DimenRes, DrawableRes, IdRes, StringRes}
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.{LinearLayoutManager, RecyclerView}
 
 import scala.language.implicitConversions
 

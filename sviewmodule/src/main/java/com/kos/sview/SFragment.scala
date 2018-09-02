@@ -1,9 +1,10 @@
 package com.kos.sview
 
-import android.support.annotation.StringRes
-import android.support.v4.app.Fragment
+
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 
 /**
   * Created by Kos on 16.08.2017.

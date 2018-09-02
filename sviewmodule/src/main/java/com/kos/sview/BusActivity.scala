@@ -1,6 +1,6 @@
 package com.kos.sview
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.kos.core.bus.{Bus, IBusHandler, IBusSender}
 import com.kos.sview.bus.BusProvider
 
